@@ -107,15 +107,19 @@ class GUI:
 
         # ========= Fetch ==========
         self.fetch_button = Button(app, text='FETCH')
-        self.fetch_button.grid(row=2, column=0, sticky="W")
+        self.fetch_button.grid(row=2, column=0, sticky="")
 
         # ========= Decode ==========
-        self.decode_button = Button(app, text='DECODE')
+        self.decode_button = Button(app, text='DECODE', command=GUI.sup)
         self.decode_button.grid(row=2, column=0, sticky="E")
 
         # ========= Execute =========
         self.execute_button = Button(app, text='EXECUTE')
         self.execute_button.grid(row=2, column=1)
+
+        # ========= Initialize =======
+        self.initialize_button = Button(app, text='INITIALIZE')
+        self.initialize_button.grid(row=2, column=0, sticky="W")
 
         # RAM Section
         self.RAM_Label = Label(app, text="RAM").grid(row=0, column=6, sticky='')
@@ -136,12 +140,16 @@ class GUI:
         self.R15 = Entry(app, width=8).grid(row=15, column=6)
         self.R16 = Entry(app, width=8).grid(row=16, column=6)
 
-        self.terminal = Text(app, width=20, height=20)
-        self.terminal.grid(row=)
+        self.terminal_label = Label(app, text='CMD', font='Hevectila 12 bold').grid(row=3, column=0)
+        self.terminal = Text(app, width=28, height=20, bd=2, relief='sunken')
+        self.terminal.grid(row=4, rowspan=10, column = 0, sticky="")
 
-    def hi(self):
-        print("Hello")
 
+    # Make the GUI update with static methods and run the Process commands at the same time.
+
+    @staticmethod
+    def sup():
+        print('sup')
 
 if __name__ == "__main__":
     main()
