@@ -2,11 +2,9 @@ from tkinter import Tk, Label, Entry, Button, Text
 
 # TODO add colors to Entries
 # TODO fix pep8 style issues
-# TODO fix initialize button, make it
 # TODO Add program counter pair to terminal
 # TODO clear up variable naming ambiguity
 # TODO add more functionality to execute statements
-# TODO allow program registers to update properly and generally.
 
 
 def main():
@@ -17,9 +15,9 @@ def main():
 
 
 # Keys denote the program to be executed.
-keys = ["1000",
-		"1012",
-		"1013",
+keys = ["1020",
+		"2012",
+		"2501",
 		"2014",
 		"3015",
 		"4016",
@@ -78,38 +76,69 @@ class Program:
 		print("Decode")
 
 	def execute(self):
-		function_dictionary = {
-			"LDA": self.LDA(),
-			"LDB": self.LDB(),
-			"LDC": self.LDC(),
-			"LDD": self.LDD(),
-			"ADD": self.ADD(),
-			"SUB": self.SUB()
-		}
+		if self.op_1 == "10":
+			self.LDA()
+		elif self.op_1 == "20":
+			self.LDB()
+		elif self.op_1 == "30":
+			self.LDC()
+		elif self.op_1 == "40":
+			self.LDD()
+		elif self.op_1 == "25":
+			self.ADD()
+		elif self.op_1 == "27":
+			self.SUB()
 
-		function_dictionary[self.instruction_dictionary[self.op_1]]
 		self.counter += 1
 		print("Execute")
 
 	def LDA(self):
-		self.REG[0] = int(self.instruction_register)
+		print("Hi")
+		self.REG[0] = int(self.op_2)
 
 	def LDB(self):
-		self.REG[1] = int(self.instruction_register)
+		self.REG[1] = int(self.op_2)
 
 	def LDC(self):
-		self.REG[2] = int(self.instruction_register)
+		self.REG[2] = int(self.op_2)
 
 	def LDD(self):
-		self.REG[3] = int(self.instruction_register)
+		print("hi")
+		self.REG[3] = int(self.op_2)
 
 	def ADD(self):
-		# Adds the values of registeres A and B and stores in M.A. Opcode 2
-		self.RAM[int(self.op_2)] = self.REG[0] = self.REG[1]
+		print(self.op_2)
+		# Adds the values of registers A and B and stores in M.A. Opcode 2
+		self.RAM[int(self.op_2)] = self.REG[0] + self.REG[1]
 
 	def SUB(self):
 		# Subtracts the values of registers c and d, stores in M.A. Opcode 2
 		self.RAM[int(self.op_2)] = self.REG[2] - self.REG[3]
+
+	def GRT(self):
+		pass
+
+	def LSS(self):
+		pass
+
+	def JMP(self):
+		pass
+
+	def STR(self):
+		pass
+
+	def PSH(self):
+		pass
+
+	def POP(self):
+		pass
+
+	def PTR(self):
+		pass
+
+	def REF(self):
+		pass
+
 
 	pass
 
@@ -242,6 +271,12 @@ class GUI:
 		self.program_counter.delete(0, 'end')
 		self.program.execute()
 		self.program_counter.insert(0, self.program.counter)
+		for x, y in enumerate(self.list_of_ram):
+			y.delete(0, 'end')
+			y.insert(0, self.program.RAM[x])
+		for x, y in enumerate(self.list_of_reg):
+			y.delete(0, 'end')
+			y.insert(0, self.program.REG[x])
 
 	pass
 
