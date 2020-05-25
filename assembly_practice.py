@@ -104,17 +104,6 @@ class Program:
 	def ldd(self):
 		self.REG[3] = int(self.op_2)
 	
-	def add(self):
-		self.RAM[int(self.op_2)] = self.REG[0] + self.REG[1]
-	
-	def sub(self):
-		self.RAM[int(self.op_2)] = self.REG[2] - self.REG[3]
-	
-	def grt(self):
-		self.RAM[int(self.op_2)] = self.REG[0] > self.REG[1]
-	
-	def lss(self):
-		self.RAM[int(self.op_2)] = self.REG[2] < self.REG[3]
 		
 	def jmp(self):
 		self.counter = int(self.op_2)
